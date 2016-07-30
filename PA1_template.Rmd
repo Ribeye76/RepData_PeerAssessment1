@@ -17,6 +17,7 @@ dfsumact <- data.frame(dates=names(sumact), total=sumact)
 
 
 ## What is mean total number of steps taken per day?
+hist(dfsumact$total, main="Histogram of Days", xlab="number of steps", ylab="days", col="blue")
 mean(dfsumact$total)
 median(dfsumact$total)
 
