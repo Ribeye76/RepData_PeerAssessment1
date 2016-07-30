@@ -18,6 +18,7 @@ dfsumact <- data.frame(dates=names(sumact), total=sumact)
 
 ## What is mean total number of steps taken per day?
 mean(dfsumact$total)
+median(dfsumact$total)
 
 
 ## What is the average daily activity pattern?
