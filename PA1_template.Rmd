@@ -7,11 +7,17 @@ output:
 
 
 ## Loading and preprocessing the data
-
+url <- "https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip"
+file <- "activity.zip"
+download.file(url, file)
+unzip(file)
+act <- read.csv("activity.csv", header=TRUE)
+sumact <- with(act, tapply(steps, date, sum, na.rm=TRUE))
+dfsumact <- data.frame(dates=names(sumact), total=sumact)
 
 
 ## What is mean total number of steps taken per day?
-
+mean(dfsumact$total)
 
 
 ## What is the average daily activity pattern?
