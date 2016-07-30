@@ -23,7 +23,13 @@ median(dfsumact$total)
 
 
 ## What is the average daily activity pattern?
+avact <- with(act, tapply(steps, as.factor(interval), mean, na.rm=TRUE))
+dfavact <- data.frame(interval=names(avact), total=avact)
+library(ggplot2)
+graph <- ggplot(data=dfavact, aes(x=interval, y=total, group=1))
+graph + geom_line(colour="blue") + labs(x="Interval", y="Average Steps", title="Average Steps per Interval")
 
+# The maximun average steps per interval is at 8:35
 
 
 ## Imputing missing values
