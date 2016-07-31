@@ -17,6 +17,7 @@ unzip(file)
 2.Process/transform the data (if necessary) into a format suitable for your analysis
 ```{r}
 act <- read.csv("activity.csv", header=TRUE)
+head(act)
 ```
 
 ## What is mean total number of steps taken per day?
@@ -83,6 +84,7 @@ day <- c("lunes","martes","miércoles","jueves","viernes","sábado","domingo")
 daytype <- c("weekday","weekday","weekday","weekday","weekday","weekend","weekend")
 df <- data.frame(day, daytype)
 actwd <- merge(act, df, by="day")
+head(actwd)
 ```
 2.Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). The plot should look something like the following, which was created using simulated data:
 ```{r}
