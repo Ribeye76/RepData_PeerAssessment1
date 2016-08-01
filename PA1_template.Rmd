@@ -7,7 +7,6 @@ output:
     keep_md: true
 ---
 
-
 ## Loading and preprocessing the data
 
 1.Load the data (i.e. read.csv())
@@ -96,7 +95,7 @@ median(dfsumfillact$total)
 1.Create a new factor variable in the dataset with two levels -- "weekday" and "weekend" indicating whether a given date is a weekday or weekend day.
 ```{r}
 act$day <- weekdays(as.Date(act$date))
-day <- c("lunes","martes","miÃ©rcoles","jueves","viernes","sÃ¡bado","domingo")
+day <- c("lunes","martes","miércoles","jueves","viernes","sábado","domingo")
 daytype <- c("weekday","weekday","weekday","weekday","weekday","weekend","weekend")
 df <- data.frame(day, daytype)
 actwd <- merge(act, df, by="day")
