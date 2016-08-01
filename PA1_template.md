@@ -41,7 +41,7 @@ dfsumact <- data.frame(dates=names(sumact), total=sumact)
 hist(dfsumact$total, main="Histogram of Days", xlab="number of steps", ylab="days", col="blue")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-3-1.png)<!-- -->
+![](PA1_template_files/figure-html/HistogramTotalSteps-1.png)<!-- -->
 
 2.Calculate and report the mean and median total number of steps taken per day
 
@@ -73,7 +73,7 @@ graph <- ggplot(data=avact, aes(x=interval, y=steps))
 graph + geom_line() + labs(x="Interval", y="Average Steps", title="Average Steps per Interval")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
+![](PA1_template_files/figure-html/Timeseriesinterval-1.png)<!-- -->
 
 2.Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
@@ -133,7 +133,7 @@ dfsumfillact <- data.frame(dates=names(sumfillact), total=sumfillact)
 hist(dfsumfillact$total, main="Histogram of Days", xlab="number of steps", ylab="days", col="blue")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
+![](PA1_template_files/figure-html/Histogramfilled-1.png)<!-- -->
 
 ```r
 mean(dfsumfillact$total)
@@ -183,4 +183,4 @@ graph <- ggplot(data=avactwd, aes(x=interval, y=steps))
 graph + geom_line() + facet_grid(daytype~.) + labs(x="Interval", y="Average Steps", title="Average Steps per Interval")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
+![](PA1_template_files/figure-html/Timeseriesbydaytype-1.png)<!-- -->
