@@ -10,7 +10,7 @@ output:
 ## Loading and preprocessing the data
 
 1.Load the data (i.e. read.csv())
-```{r}
+```{r Loadfiles}
 url <- "https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip"
 file <- "activity.zip"
 download.file(url, file)
@@ -18,7 +18,7 @@ unzip(file)
 ```
 
 2.Process/transform the data (if necessary) into a format suitable for your analysis
-```{r}
+```{r Processfiles}
 act <- read.csv("activity.csv", header=TRUE)
 head(act)
 ```
@@ -27,14 +27,14 @@ head(act)
 ## What is mean total number of steps taken per day?
 
 1.Make a histogram of the total number of steps taken each day
-```{r}
+```{r HistogramTotalSteps}
 sumact <- with(act, tapply(steps, date, sum, na.rm=TRUE))
 dfsumact <- data.frame(dates=names(sumact), total=sumact)
 hist(dfsumact$total, main="Histogram of Days", xlab="number of steps", ylab="days", col="blue")
 ```
 
 2.Calculate and report the mean and median total number of steps taken per day
-```{r}
+```{r meanandmedian}
 mean(dfsumact$total)
 median(dfsumact$total)
 ```
@@ -43,7 +43,7 @@ median(dfsumact$total)
 ## What is the average daily activity pattern?
 
 1.Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
-```{r}
+```{r Timeseriesinterval}
 avact <- aggregate(x=list(steps=act$steps), by=list(interval=act$interval), FUN=mean, na.rm=TRUE)
 library(ggplot2)
 graph <- ggplot(data=avact, aes(x=interval, y=steps))
@@ -51,7 +51,7 @@ graph + geom_line() + labs(x="Interval", y="Average Steps", title="Average Steps
 ```
 
 2.Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
-```{r}
+```{r maxinterval}
 avact[which.max(avact$steps),]
 ```
 
@@ -59,7 +59,7 @@ avact[which.max(avact$steps),]
 ## Imputing missing values
 
 1. Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with NAs)
-```{r}
+```{r Numberofmissing}
 miss <- is.na(act$steps)
 table(miss)
 ```
@@ -69,7 +69,7 @@ table(miss)
 My strategy is to use the mean for the 5-minute interval to fill each NA value in the steps column.
 
 3.Create a new dataset that is equal to the original dataset but with the missing data filled in.
-```{r}
+```{r Newdatasetfilled}
 fillact <- act 
 for (i in 1:nrow(fillact)) {
     if (is.na(fillact$steps[i])) {
@@ -81,7 +81,7 @@ table(newmiss)
 ```
 
 4.Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day. Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
-```{r}
+```{r Histogramfilled}
 sumfillact <- with(fillact, tapply(steps, date, sum, na.rm=TRUE))
 dfsumfillact <- data.frame(dates=names(sumfillact), total=sumfillact)
 hist(dfsumfillact$total, main="Histogram of Days", xlab="number of steps", ylab="days", col="blue")
@@ -93,7 +93,7 @@ median(dfsumfillact$total)
 ## Are there differences in activity patterns between weekdays and weekends?
 
 1.Create a new factor variable in the dataset with two levels -- "weekday" and "weekend" indicating whether a given date is a weekday or weekend day.
-```{r}
+```{r weekdays}
 act$day <- weekdays(as.Date(act$date))
 day <- c("lunes","martes","miércoles","jueves","viernes","sábado","domingo")
 daytype <- c("weekday","weekday","weekday","weekday","weekday","weekend","weekend")
@@ -103,7 +103,7 @@ head(actwd)
 ```
 
 2.Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). The plot should look something like the following, which was created using simulated data:
-```{r}
+```{r Timeseriesbydaytype}
 avactwd <- aggregate(x=list(steps=actwd$steps), by=list(interval=actwd$interval, daytype=actwd$daytype), FUN=mean, na.rm=TRUE)
 graph <- ggplot(data=avactwd, aes(x=interval, y=steps))
 graph + geom_line() + facet_grid(daytype~.) + labs(x="Interval", y="Average Steps", title="Average Steps per Interval")
